@@ -2,7 +2,7 @@
 
 The goal of this document is to reference any commentary, tip or generally anything learned on the Swift Programming language. Most of this will probably be related to the Paul Hegarty's course : Developping apps for iOs 8 (cf Standford University, iTunes U ©).  
 
-##Day one : Calculator (id:1stDay)
+##[Day one : Calculator](id:1stDay)
 
 
 * First problem : optional Strings
