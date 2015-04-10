@@ -7,9 +7,7 @@ The goal of this document is to reference any commentary, tip or generally anyth
 
 * First problem : optional Strings
         
-`        
-let digit = sender.currentTitle!
-`
+`let digit = sender.currentTitle!`
 
 
 	digit is actually an optional that can be a string.
@@ -20,9 +18,7 @@ let digit = sender.currentTitle!
     ⚠️ Use the ! carefully : if the value of the variable next to it is 'not set' or nil, it will crash the program.
         
         
-```       
-let digit = sender.currentTitle!
-        ```
+`let digit = sender.currentTitle!`
         
         
  Similar problem below  : there's an **error** 
