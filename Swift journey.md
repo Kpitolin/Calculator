@@ -38,7 +38,7 @@ The goal of this document is to reference any commentary, tip or generally anyth
 
 * Second problem : initializers
 
-![image](/Users/KEV/Desktop/Capture d’écran 2015-04-10 à 21.46.04.png)
+![image](/Users/KEV/Desktop/Capture d’écran 2015-04-10 à 21.24.05.png)
 
 Now it says Class 'ViewController' has no initializers. That's because week-end declared userIsIntheMiddleOfTypingANumber without giving it a value nor giving it an initializer. 
 
