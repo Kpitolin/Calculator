@@ -71,8 +71,38 @@ class ViewController: UIViewController
         
     }
     
+
+    
+    
+    @IBAction func operate(sender: UIButton) {
+        
+        let operation = sender.currentTitle!
+        if userIsIntheMiddleOfTypingANumber {
+            enter() // automatic enter
+        }
+        
+        switch operation {
+        case "x": performOperation {$0*$1}
+            
+        case "÷": performOperation {(op1, op2) in
+            
+            if op1 != 0.0 {
+            return op2/op1
+            }
+            return 0.0
+            }
+        case "+": performOperation {$0+$1}
+        case "-": performOperation {$1-$0}
+        case "√": performOperation {sqrt($0)}
+
+        default: break
+            
+        }
+        
+    }
+    
     // The main idea is that we get all the elements typed before the operator that are still in the stack then we 'operate' them
-    func performOperation (operation: (Double,Double)->Double ){
+    func performOperation (operation: (Double,Double) -> Double ) {
         if operandStack.count >= 2
             
         {
@@ -82,49 +112,14 @@ class ViewController: UIViewController
     }
     
     
-
-    
-    func multiply (op1: Double, op2: Double) ->Double {
-        
-        return op1*op2
-    }
-    
-    func plus (op1: Double, op2: Double) ->Double {
-        
-        return op1+op2
-    }
-    
-    func minus (op1: Double, op2: Double) ->Double {
-        
-        return op1-op2
-    }
-    
-    func divide (op1: Double, op2: Double) ->Double {
-        
-        if op2 != 0.0 {
-         return op1/op2
-        }
-        return 0.0
-    }
-    @IBAction func operate(sender: UIButton) {
-        
-        let operation = sender.currentTitle!
-        if userIsIntheMiddleOfTypingANumber {
-            enter() // automatic enter
-        }
-        
-        switch operation {
-        case "x": performOperation(multiply)
-        case "+": performOperation(divide)
-        case "÷": performOperation(plus)
-        case "-": performOperation(minus)
+    func performOperation (operation:Double -> Double) {
+        if operandStack.count >= 1
             
-        default: break
-            
+        {
+            displayValue = operation (operandStack.removeLast())
+            enter()
         }
-        
     }
-    
 
     
     
