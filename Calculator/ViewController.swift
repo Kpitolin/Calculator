@@ -93,7 +93,7 @@ class ViewController: UIViewController
             }
         case "+": performOperation {$0+$1}
         case "-": performOperation {$1-$0}
-        case "√": performOperation {sqrt($0)}
+        case "√": performSingleOperation {sqrt($0)}
 
         default: break
             
@@ -112,7 +112,7 @@ class ViewController: UIViewController
     }
     
     
-    func performOperation (operation:Double -> Double) {
+    func performSingleOperation (operation:Double -> Double) {
         if operandStack.count >= 1
             
         {
