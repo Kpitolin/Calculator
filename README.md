@@ -70,7 +70,8 @@ This kind of type applies well to properties that get set very early in the exec
 Still, if its value remains nil, the program will crash. Though it's not supposed to happen.
 
 
-### Type inference / Array creation
+### Fourth thing : Type inference / Array creation
+===
     
 `var operandStack: Array <Double> = Array <Double> ()`
 
@@ -79,4 +80,19 @@ and
 `var operandStack = Array <Double> ()`
 
  are actually equivalent because of Swift type inference. The second option is recommended though.
+
+ 
+
+### Fifth problem : Objective-C and overloading
+===
+
+![image](imgReadMe/bug3.png)
+
+
+Objective-C does not support method overloading, but Swift does. That's why we can't overload our function to do 2-operands operations and single-operand operations with the same name. But wait, aren't week-end coding in Swift ? 
+
+Yes, but ... not exactly.
+
+As we inherited our ViewController from UIViewController, we inherited NSObject and made the class interopable to Obj-C.That's why it works when you remove the inheritance.
+ 
 
