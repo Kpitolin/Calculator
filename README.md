@@ -89,7 +89,7 @@ and
 ![image](imgReadMe/bug3.png)
 
 
-Objective-C does not support method overloading, but Swift does. That's why we can't overload our function to do 2-operands operations and single-operand operations with the same name. But wait, aren't week-end coding in Swift ? 
+Objective-C does not support method overloading, but Swift does. That's why we can't overload our function to do 2-operands operations and single-operand operations with the same name. But wait, aren't we coding in Swift ? 
 
 Yes, but ... not exactly.
 
