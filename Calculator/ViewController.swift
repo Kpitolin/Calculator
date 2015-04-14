@@ -20,6 +20,7 @@ class ViewController: UIViewController
         
         let digit = sender.currentTitle!
         
+        
         if userIsIntheMiddleOfTypingANumber {
             display.text = display.text! + digit
 
@@ -43,6 +44,8 @@ class ViewController: UIViewController
     *
     */
     var operandStack = Array <Double> ()
+    
+    
     @IBAction func enter() {
         
     userIsIntheMiddleOfTypingANumber = false // As the numbers will be put in the start and we start typing a new number, we want them to be cleaned out, to start a new number
@@ -89,12 +92,13 @@ class ViewController: UIViewController
             if op1 != 0.0 {
             return op2/op1
             }
-            return 0.0
+            return 0
             }
         case "+": performOperation {$0+$1}
         case "-": performOperation {$1-$0}
         case "√": performSingleOperation {sqrt($0)}
-
+        case "sin": performSingleOperation {sin($0)}
+        case "cos": performSingleOperation {cos($0)}
         default: break
             
         }
@@ -122,8 +126,20 @@ class ViewController: UIViewController
     }
 
     
+    @IBAction func erase(sender: UIButton) {
+    operandStack = []
+    assert(operandStack.isEmpty)
+    display.text = "0"
+    }
     
 
+    @IBAction func pi(sender: UIButton) {
+    
+     if display.text! != "0" && userIsIntheMiddleOfTypingANumber {enter()}   // Catches the case where π is the first digit touched
+     display.text = "\(M_PI)"
+     enter()
+        
+    }
     
     
     
