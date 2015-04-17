@@ -49,7 +49,7 @@ class ViewController: UIViewController
     @IBAction func enter() {
         
     userIsIntheMiddleOfTypingANumber = false // As the numbers will be put in the start and we start typing a new number, we want them to be cleaned out, to start a new number
-     
+    
     operandStack.append(displayValue)
         
     println("operand Stack = \(operandStack) ")
@@ -140,6 +140,8 @@ class ViewController: UIViewController
      enter()
         
     }
+    
+    
     
     
     

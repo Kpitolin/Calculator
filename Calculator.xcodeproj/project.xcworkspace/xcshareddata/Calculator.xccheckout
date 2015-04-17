@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>DD8630DF-D4B7-4FA4-9D69-B19A1CF3E6F0</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Calculator</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>F4CC9148D80ABED12B22AB85E5147A320D1EF8DD</key>
 		<string>https://github.com/Kpitolin/Calculator.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Calculator.xcodeproj/project.xcworkspace</string>
+	<string>Calculator.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>F4CC9148D80ABED12B22AB85E5147A320D1EF8DD</key>
