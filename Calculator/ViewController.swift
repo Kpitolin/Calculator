@@ -12,6 +12,7 @@ class ViewController: UIViewController
 {
 
     @IBOutlet weak var display: UILabel!
+    @IBOutlet weak var history: UILabel!
     
     var userIsIntheMiddleOfTypingANumber = false
 
@@ -19,11 +20,12 @@ class ViewController: UIViewController
         
         
         let digit = sender.currentTitle!
-        
+        history.text! += sender.currentTitle!
+
         if display.text!.componentsSeparatedByString(".").count == 2 && sender.currentTitle! == "."
         {
            
-            UIView.animateWithDuration(2.0, animations:
+            UIView.animateWithDuration(5.0, animations:
                 {self.display.backgroundColor = UIColor.redColor() },
                 completion:
                 {(completed: Bool) in if completed{ self.display.backgroundColor = UIColor.whiteColor()}})
@@ -62,7 +64,8 @@ class ViewController: UIViewController
     operandStack.append(displayValue)
         
     println("operand Stack = \(operandStack) ")
-        
+    
+        history.text! += " "
         
     }
     
@@ -74,7 +77,7 @@ class ViewController: UIViewController
             
             var number : Double
             
-            
+
                 return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
                 
 
@@ -82,6 +85,8 @@ class ViewController: UIViewController
         }
         
         set {
+            history.text! += "=\(newValue)"
+
             display.text = "\(newValue)"
             userIsIntheMiddleOfTypingANumber = false
         }
@@ -94,6 +99,8 @@ class ViewController: UIViewController
     @IBAction func operate(sender: UIButton) {
         
         let operation = sender.currentTitle!
+        history.text! += operation
+        
         if display.text! != "0" && userIsIntheMiddleOfTypingANumber { // Catches the case where operand is the first button touched
             enter() // automatic enter
         }
@@ -146,6 +153,7 @@ class ViewController: UIViewController
     operandStack = []
     assert(operandStack.isEmpty)
     display.text = "0"
+    history.text = ""
     }
 
 
