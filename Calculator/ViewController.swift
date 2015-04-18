@@ -10,31 +10,32 @@ import UIKit
 
 class ViewController: UIViewController
 {
-
+    
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var history: UILabel!
     
     var userIsIntheMiddleOfTypingANumber = false
-
+    
+    var brain = CalculatorBrain()
+    
     @IBAction func appendDigit(sender: UIButton) {
         
         
         let digit = sender.currentTitle!
-        history.text! += sender.currentTitle!
-
+        
         if display.text!.componentsSeparatedByString(".").count == 2 && sender.currentTitle! == "."
         {
-           
+            
             UIView.animateWithDuration(5.0, animations:
                 {self.display.backgroundColor = UIColor.redColor() },
                 completion:
                 {(completed: Bool) in if completed{ self.display.backgroundColor = UIColor.whiteColor()}})
             // put the button in red
-           
+            
         }
         else if userIsIntheMiddleOfTypingANumber {
             display.text = display.text! + digit
-
+            
         }
             
         else
@@ -42,7 +43,7 @@ class ViewController: UIViewController
         {
             display.text = digit
             userIsIntheMiddleOfTypingANumber = true
-
+            
         }
         
         
@@ -51,21 +52,20 @@ class ViewController: UIViewController
     
     /*
     *
-     The main purpose of enter is to put the number of the screen in the internal stack
+    The main purpose of enter is to put the number of the screen in the internal stack
     *
     */
-    var operandStack = Array <Double> ()
     
     
     @IBAction func enter() {
         
-    userIsIntheMiddleOfTypingANumber = false // As the numbers will be put in the start and we start typing a new number, we want them to be cleaned out, to start a new number
-    
-    operandStack.append(displayValue)
+        userIsIntheMiddleOfTypingANumber = false // As the numbers will be put in the start and we start typing a new number, we want them to be cleaned out, to start a new number
         
-    println("operand Stack = \(operandStack) ")
-    
-        history.text! += " "
+        if let result = brain.pushOperand(displayValue) {
+            displayValue = result
+        } else {
+            displayValue = 0
+        }
         
     }
     
@@ -77,88 +77,61 @@ class ViewController: UIViewController
             
             var number : Double
             
-
-                return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
-                
-
-
+            
+            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+            
+            
+            
         }
         
         set {
-            history.text! += "=\(newValue)"
-
+            
             display.text = "\(newValue)"
             userIsIntheMiddleOfTypingANumber = false
         }
         
     }
     
-
+    
     
     
     @IBAction func operate(sender: UIButton) {
         
-        let operation = sender.currentTitle!
-        history.text! += operation
+        
         
         if display.text! != "0" && userIsIntheMiddleOfTypingANumber { // Catches the case where operand is the first button touched
             enter() // automatic enter
         }
         
-        switch operation {
-        case "x": performOperation {$0*$1}
-            
-        case "÷": performOperation {(op1, op2) in
-            
-            if op1 != 0.0 {
-            return op2/op1
+        
+        if let operation = sender.currentTitle {
+            if let result = brain.performOperation(operation){
+                
+                displayValue = result
+                
+            } else {
+                
+                displayValue = 0
+                
             }
-            return 0
-            }
-        case "+": performOperation {$0+$1}
-        case "-": performOperation {$1-$0}
-        case "√": performSingleOperation {sqrt($0)}
-        case "sin": performSingleOperation {sin($0)}
-        case "cos": performSingleOperation {cos($0)}
-        case "π": display.text = "\(M_PI)" ; enter()
-
-        default: break
+            
             
         }
+    }
+    
+    
+    
+    
+    @IBAction func erase(sender: UIButton) {
+        brain.emptyStack()
+        display.text = "0"
+        history.text = ""
         
     }
     
-    // The main idea is that we get all the elements typed before the operator that are still in the stack then we 'operate' them
-    func performOperation (operation: (Double,Double) -> Double ) {
-        if operandStack.count >= 2
-            
-        {
-            displayValue = operation (operandStack.removeLast(),operandStack.removeLast())
-            enter()
-        }
-    }
     
     
-    func performSingleOperation (operation:Double -> Double) {
-        if operandStack.count >= 1
-            
-        {
-            displayValue = operation (operandStack.removeLast())
-            enter()
-        }
-    }
-
     
-    @IBAction func erase(sender: UIButton) {
-    operandStack = []
-    assert(operandStack.isEmpty)
-    display.text = "0"
-    history.text = ""
-    }
-
-
     
-
-
-
+    
 }
