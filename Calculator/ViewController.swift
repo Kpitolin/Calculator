@@ -94,7 +94,7 @@ class ViewController: UIViewController
     @IBAction func operate(sender: UIButton) {
         
         let operation = sender.currentTitle!
-        if userIsIntheMiddleOfTypingANumber {
+        if display.text! != "0" && userIsIntheMiddleOfTypingANumber { // Catches the case where operand is the first button touched
             enter() // automatic enter
         }
         
@@ -113,6 +113,8 @@ class ViewController: UIViewController
         case "√": performSingleOperation {sqrt($0)}
         case "sin": performSingleOperation {sin($0)}
         case "cos": performSingleOperation {cos($0)}
+        case "π": display.text = "\(M_PI)" ; enter()
+
         default: break
             
         }
@@ -145,21 +147,10 @@ class ViewController: UIViewController
     assert(operandStack.isEmpty)
     display.text = "0"
     }
+
+
     
 
-    @IBAction func pi(sender: UIButton) {
-    
-     if display.text! != "0" && userIsIntheMiddleOfTypingANumber {enter()}   // Catches the case where π is the first digit touched
-     display.text = "\(M_PI)"
-     enter()
-        
-    }
-    
-    
-    
-    
-    
-    
+
 
 }
-
