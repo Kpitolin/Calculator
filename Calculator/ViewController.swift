@@ -20,8 +20,17 @@ class ViewController: UIViewController
         
         let digit = sender.currentTitle!
         
-        
-        if userIsIntheMiddleOfTypingANumber {
+        if display.text!.componentsSeparatedByString(".").count == 2 && sender.currentTitle! == "."
+        {
+           
+            UIView.animateWithDuration(2.0, animations:
+                {self.display.backgroundColor = UIColor.redColor() },
+                completion:
+                {(completed: Bool) in if completed{ self.display.backgroundColor = UIColor.whiteColor()}})
+            // put the button in red
+           
+        }
+        else if userIsIntheMiddleOfTypingANumber {
             display.text = display.text! + digit
 
         }
@@ -63,7 +72,12 @@ class ViewController: UIViewController
         
         get {
             
-           return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+            var number : Double
+            
+            
+                return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+                
+
 
         }
         
