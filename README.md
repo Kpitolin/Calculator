@@ -96,3 +96,87 @@ Yes, but ... not exactly.
 As we inherited our ViewController from UIViewController, we inherited NSObject and made the class interopable to Obj-C.That's why it works when you remove the inheritance.
  
 
+### Sixth problem : return of a dictionnary
+===
+
+In Swift a dictionnary return an Optional value. Why is that ? Because, if the value can't be found in the dictionnary, it must be able to return nil.
+
+That why this is incorrect : 
+
+```
+var dico = [String:Int]()
+
+dico["neuf"] = 9
+
+let number  = dico["neuf"] 
+
+if number < 10 {  // we cannot compare optional int and int
+
+/**
+* Operations with numbers here
+*/
+
+}
+
+```
+And this is correct (because of optional binding) : 
+
+```
+
+var dico = [String:Int]()
+
+dico["neuf"] = 9
+
+if let number  = dico["neuf"] {
+
+/**
+* Operations with numbers here
+*/
+
+}
+
+
+```
+
+### Seventh problem : Public and privates
+===
+In Swift, in a class, if you don't put any access keyword in front of a property or method, it'll be public ... 
+
+If you put the keyword private, it won't be accessible in the outside of the class.
+
+But if you use the keyword public, it'll be accessible to anyone to do anything. 
+⚠️Use the public keyword with caution.
+
+### Eight problem : Printable values
+===
+
+If I define an enum, or a struct and try to printl them, it might return me things like Enum value or other things not explicit to the reader understanding.
+In order to correct that, you've got to tell them how to prnt themselves. But how do I do that ?
+By implementing the Printable protocol.
+See below : 
+
+```
+ enum Op : Printable 
+
+```
+
+
+This is a protocol that need only one thing : a property **read-only ** called description that you need to compute. (Because there's only computed properties allowed in enums).
+See below : 
+
+```
+
+        var description : String {
+            get{
+                switch self {
+                case .Operand(let operand) : return "\(operand)"
+                case .UnaryOperation(let symbol, _): return symbol
+                case .BinaryOperation(let symbol, _): return symbol
+                    
+                }
+            }
+            
+        }
+```
+
+
