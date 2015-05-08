@@ -18,6 +18,7 @@ class ViewController: UIViewController
     
     var brain = CalculatorBrain()
     
+    
     @IBAction func appendDigit(sender: UIButton) {
         
         
@@ -45,6 +46,9 @@ class ViewController: UIViewController
             userIsIntheMiddleOfTypingANumber = true
             
         }
+        
+        history.text = brain.description
+
         
         
     }
@@ -76,11 +80,7 @@ class ViewController: UIViewController
         get {
             
             var number : Double
-            
-            
             return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
-            
-            
             
         }
         
@@ -126,10 +126,11 @@ class ViewController: UIViewController
         brain.emptyStack()
         display.text = "0"
         history.text = ""
+        userIsIntheMiddleOfTypingANumber = false
         
     }
     
-    
+
     
     
     
